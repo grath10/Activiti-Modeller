@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.workflow.mapper.HistoricVariableMapper">
+    <resultMap id="variableInstanceResultMap" type="com.workflow.entity.HistoricVariable">
+        <id property="id" column="ID_" jdbcType="VARCHAR" />
+        <result property="revision" column="REV_" jdbcType="INTEGER" />
+        <result property="type" column="TYPE_" javaType="String" jdbcType="VARCHAR" />
+        <result property="name" column="NAME_" javaType="String" jdbcType="VARCHAR" />
+        <result property="processInstanceId" column="PROC_INST_ID_" jdbcType="VARCHAR" />
+        <result property="executionId" column="EXECUTION_ID_" jdbcType="VARCHAR" />
+        <result property="taskId" column="TASK_ID_" jdbcType="VARCHAR" />
+        <result property="doubleValue" column="DOUBLE_" jdbcType="DOUBLE" />
+        <result property="textValue" column="TEXT_" jdbcType="VARCHAR" />
+        <result property="textValue2" column="TEXT2_" jdbcType="VARCHAR" />
+        <result property="longValue" column="LONG_" jdbcType="BIGINT" />
+        <result property="createTime" column="CREATE_TIME_" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getVariable" parameterType="java.util.Map" resultMap="variableInstanceResultMap">
+      select * from HI_VARIABLE where PROC_INST_ID_ = #{processInstanceId, jdbcType=VARCHAR} and TASK_ID_ = #{taskId, jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertVariable" parameterType="com.workflow.entity.HistoricVariable">
+        insert into HI_VARIABLE (ID_, TYPE_, NAME_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_,
+        DOUBLE_, LONG_ , TEXT_, TEXT2_, CREATE_TIME_)
+        values (
+        #{id, jdbcType=VARCHAR},
+        #{type, jdbcType=VARCHAR},
+        #{name, jdbcType=VARCHAR},
+        #{processInstanceId, jdbcType=VARCHAR},
+        #{executionId, jdbcType=VARCHAR},
+        #{taskId, jdbcType=VARCHAR},
+        #{doubleValue, jdbcType=DOUBLE},
+        #{longValue, jdbcType=BIGINT},
+        #{textValue, jdbcType=VARCHAR},
+        #{textValue2, jdbcType=VARCHAR},
+        #{createTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+</mapper>

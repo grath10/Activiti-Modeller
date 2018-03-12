@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section class="content container-fluid" th:fragment="main" >
+    <div id="loading-mask"  style="display: none;">
+        <div id="dashboard-content"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="box box-primary" id="box1" style="display: none;">
+                    <div class="box-body">
+                        <div id="chart1" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <div class="box box-primary" id="box2" style="display: none;">
+                    <div class="box-body">
+                        <div id="chart2" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="box box-primary" id="box3" style="display: none;">
+                    <div class="box-body">
+                        <div id="chart3" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <div class="box box-primary" id="box4" style="display: none;">
+                    <div class="box-body">
+                        <div id="chart4" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="box box-primary" id="box5" style="display: none;">
+                    <div class="box-body">
+                        <div id="chart5" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <div class="box box-primary" id="box6" style="display: none;">
+                    <div class="box-body">
+                        <div id="chart6" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">最新记录</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="index-table" class="table-striped table table-bordered table-hover dataTable" cellpadding="0" cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/thirdparty/echarts.min.js"></script>
+    <script src="/js/thirdparty/jquery.dataTables.js"></script>
+    <script src="/js/index.js"></script>
+</section>
+</html>

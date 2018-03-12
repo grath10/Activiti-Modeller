@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.workflow.mapper.ModelMapper">
+    <resultMap id="modelMap" type="com.workflow.entity.activiti.Model">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="key" column="model_key" />
+        <result property="description" column="description" />
+        <result property="created" column="created" />
+        <result property="lastUpdated" column="last_updated" />
+        <result property="createdBy" column="created_by" />
+        <result property="lastUpdatedBy" column="last_updated_by" />
+        <result property="version" column="version" />
+        <result property="modelEditorJson" column="model_editor_json" typeHandler="com.workflow.entity.activiti.CustomizedBlobTypeHandler"/>
+        <result property="comment" column="model_comment" />
+        <result property="modelType" column="model_type" />
+        <result property="thumbnail" column="thumbnail" />
+    </resultMap>
+
+    <select id="findModelsCreatedBy" resultMap="modelMap">
+        select * from act_de_model as model where model.created_by = #{user} and model.model_type = #{modelType}
+    </select>
+
+    <select id="findModelsCreatedByFilter" resultMap="modelMap">
+        select * from act_de_model as model where model.created_by = #{user} and
+        (lower(model.name) like #{filter} or lower(model.description) like #{filter}) and model.model_type = #{modelType}
+    </select>
+
+    <select id="findModelsByKeyAndType" resultMap="modelMap">
+        select * from act_de_model as model where model.model_key = #{key} and model.model_type = #{modelType}
+    </select>
+
+    <select id="findModelsByModelTypeFilter" resultMap="modelMap">
+        select * from act_de_model as model where (lower(model.name) like #{filter} or lower(model.description) like #{filter}) and model.model_type = #{modelType}
+    </select>
+
+    <select id="findModelsByModelType" resultMap="modelMap">
+        select * from act_de_model as model where model.model_type = #{modelType}
+    </select>
+
+    <select id="countByModelTypeAndUser" resultType="Long">
+        select count(m.id) from act_de_model m where m.created_by = #{user} and m.model_type = #{modelType}
+    </select>
+
+    <select id="appDefinitionIdByModelAndUser" resultType="String">
+        select model.key from act_de_model as model where model.id = #{modelId} and model.created_by = #{user]
+    </select>
+
+    <select id="findOne" resultMap="modelMap">
+        select * from act_de_model as model where model.id = #{modelId}
+    </select>
+
+    <!--<update id="updateModuleInfo">-->
+        <!--update module set lowthreshold=#{lowthreshold}, highthreshold=#{highthreshold}, delta=#{delta}, normalsample=#{normalsample}, abnormalsample=#{abnormalsample} where name=#{name}-->
+    <!--</update>-->
+
+    <insert id="save">
+        insert into act_de_model (`name`, model_key, description, created, last_updated,
+        created_by, last_updated_by , version, model_editor_json, model_comment, model_type, thumbnail)
+        values (
+        #{name}, #{key}, #{description}, #{created}, #{lastUpdated},
+        #{createdBy}, #{lastUpdatedBy}, #{version},
+        #{modelEditorJson}, #{comment}, #{modelType}, #{thumbnail}
+        )
+    </insert>
+
+    <delete id="delete">
+        delete from act_de_model where id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,126 @@
+CREATE TABLE `act_de_model` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NULL DEFAULT NULL,
+	`model_key` VARCHAR(50) NULL DEFAULT NULL,
+	`description` VARCHAR(50) NULL DEFAULT NULL,
+	`created` TIMESTAMP NULL DEFAULT NULL,
+	`last_updated` TIMESTAMP NULL DEFAULT NULL,
+	`created_by` VARCHAR(50) NULL DEFAULT NULL,
+	`last_updated_by` VARCHAR(50) NULL DEFAULT NULL,
+	`version` INT(11) NULL DEFAULT NULL,
+	`model_editor_json` LONGBLOB NULL,
+	`model_comment` VARCHAR(50) NULL DEFAULT NULL,
+	`model_type` INT(11) NULL DEFAULT NULL,
+	`thumbnail` BLOB NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `act_de_model_history` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NULL DEFAULT NULL,
+	`model_id` VARCHAR(50) NULL DEFAULT NULL,
+	`model_key` VARCHAR(50) NULL DEFAULT NULL,
+	`description` VARCHAR(50) NULL DEFAULT NULL,
+	`created` TIMESTAMP NULL DEFAULT NULL,
+	`last_updated` TIMESTAMP NULL DEFAULT NULL,
+	`created_by` VARCHAR(50) NULL DEFAULT NULL,
+	`last_updated_by` VARCHAR(50) NULL DEFAULT NULL,
+	`version` INT(11) NULL DEFAULT NULL,
+	`model_editor_json` LONGBLOB NULL,
+	`model_comment` VARCHAR(50) NULL DEFAULT NULL,
+	`model_type` INT(11) NULL DEFAULT NULL,
+	`removal_date` TIMESTAMP NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `login_attempts` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL DEFAULT '',
+  `attempts` INT(11) NOT NULL,
+  `lastTime` VARCHAR(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `menu` (
+  `id` TINYINT(4) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL DEFAULT '',
+  `url` VARCHAR(50) NOT NULL DEFAULT '-1',
+  `icon` VARCHAR(50) NOT NULL DEFAULT '',
+  `parent` TINYINT(4) NOT NULL DEFAULT '-1',
+  PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `leave_request` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `userId` VARCHAR(50) NOT NULL,
+  `processInstanceId` VARCHAR(50) NOT NULL,
+  `startTime` DATETIME(3) NOT NULL,
+  `endTime` DATETIME(3) NOT NULL,
+  `realStartTime` DATETIME(3) NULL DEFAULT NULL,
+  `realEndTime` DATETIME(3) NULL DEFAULT NULL,
+  `applyTime` DATETIME(3) NOT NULL,
+  `reason` VARCHAR(200) NOT NULL,
+  `deptApproved` VARCHAR(10) NOT NULL DEFAULT 'false',
+  `hrApproved` VARCHAR(10) NOT NULL DEFAULT 'false',
+  PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `user` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  `roleId` INT(2) NOT NULL,
+  `accountNonLocked` TINYINT(1) NOT NULL DEFAULT '1',
+  `accountNonExpired` TINYINT(1) NOT NULL DEFAULT '1',
+  `credentialsNonExpired` TINYINT(1) NOT NULL DEFAULT '1',
+  `lastLoginTime` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `user_role` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `role` VARCHAR(50) NOT NULL,
+  `enable` TINYINT(1) NOT NULL DEFAULT '1',
+  `description` VARCHAR(50) NOT NULL,
+  `remark` VARCHAR(50) NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `hi_variable` (
+  `ID_` VARCHAR(64) NOT NULL COLLATE 'utf8_bin',
+  `TYPE_` VARCHAR(255) NOT NULL COLLATE 'utf8_bin',
+  `NAME_` VARCHAR(255) NOT NULL COLLATE 'utf8_bin',
+  `EXECUTION_ID_` VARCHAR(64) NULL DEFAULT NULL COLLATE 'utf8_bin',
+  `PROC_INST_ID_` VARCHAR(64) NULL DEFAULT NULL COLLATE 'utf8_bin',
+  `TASK_ID_` VARCHAR(64) NULL DEFAULT NULL COLLATE 'utf8_bin',
+  `DOUBLE_` DOUBLE NULL DEFAULT NULL,
+  `LONG_` BIGINT(20) NULL DEFAULT NULL,
+  `TEXT_` VARCHAR(4000) NULL DEFAULT NULL COLLATE 'utf8_bin',
+  `TEXT2_` VARCHAR(4000) NULL DEFAULT NULL COLLATE 'utf8_bin',
+  `CREATE_TIME_` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`ID_`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;

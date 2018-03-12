@@ -1,0 +1,44 @@
+<section class="content container-fluid">
+    <div class="">
+        <select class="select-control" id="processName">
+            <option value="emergency">应急响应</option>
+            <option value="leave">请假</option>
+        </select>
+        <input type="button" id="process-start-btn" value="启动流程" class="btn btn-default" style="vertical-align: top;"/>
+    </div>
+</section>
+<div class="modal fade" id="leave-panel" tabindex="-1" role="dialog" aria-labelledby="leave-panel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="leave-startDate">开始时间：</label>
+                    <div class="input-group date form-datetime">
+                    	<input class="form-control date-time-picker" id="leave-startDate" name="selectedStartTime" type="text" readonly="readonly" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="leave-endDate">结束时间：</label>
+                    <div class="input-group date form-datetime">
+                    	<input class="form-control date-time-picker" id="leave-endDate" name="selectedEndTime" type="text" readonly="readonly" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="leave-reason">请假原因：</label>
+                    <div class="controls">
+                        <textarea class="form-control" id="leave-reason" name="reason" required="required"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="leave-submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" />
+<script src="/js/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" />
+<script src="/js/start.js" />

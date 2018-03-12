@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="emergency" name="多级应急响应" isExecutable="true">
+    <startEvent id="startEvent1" name="开始" activiti:initiator="applyUserId"></startEvent>
+    <userTask id="first-handle" name="第一级处理" activiti:candidateGroups="ROLE_FIRST"></userTask>
+    <userTask id="second-handle" name="第二级处理" activiti:candidateGroups="ROLE_SECOND"></userTask>
+    <userTask id="third-handle" name="第三级处理" activiti:candidateGroups="ROLE_THIRD"></userTask>
+    <endEvent id="EndEvent1" name="结束"></endEvent>
+    <sequenceFlow id="flow2" name="二级响应" sourceRef="first-timer" targetRef="second-handle"></sequenceFlow>
+    <sequenceFlow id="flow5" name="结束2" sourceRef="second-handle" targetRef="EndEvent1"></sequenceFlow>
+    <sequenceFlow id="flow6" name="结束1" sourceRef="first-handle" targetRef="EndEvent1"></sequenceFlow>
+    <sequenceFlow id="flow3" name="三级响应" sourceRef="second-timer" targetRef="third-handle"></sequenceFlow>
+    <sequenceFlow id="flow1" name="第一步" sourceRef="startEvent1" targetRef="first-handle"></sequenceFlow>
+    <boundaryEvent id="first-timer" name="延时1" attachedToRef="first-handle" cancelActivity="true">
+      <timerEventDefinition>
+        <timeDuration>#{time1}</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <boundaryEvent id="second-timer" name="延时2" attachedToRef="second-handle" cancelActivity="true">
+      <timerEventDefinition>
+        <timeDuration>#{time2}</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="flow4" name="结束3" sourceRef="third-handle" targetRef="EndEvent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_emergency">
+    <bpmndi:BPMNPlane bpmnElement="emergency" id="BPMNPlane_emergency">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="15.0" y="85.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="first-handle" id="BPMNShape_first-handle">
+        <omgdc:Bounds height="80.0" width="100.0" x="120.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="second-handle" id="BPMNShape_second-handle">
+        <omgdc:Bounds height="80.0" width="100.0" x="285.0" y="65.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="third-handle" id="BPMNShape_third-handle">
+        <omgdc:Bounds height="80.0" width="100.0" x="615.0" y="71.88074817248312"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent1" id="BPMNShape_EndEvent1">
+        <omgdc:Bounds height="28.0" width="28.0" x="321.0" y="225.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="first-timer" id="BPMNShape_first-timer">
+        <omgdc:Bounds height="31.0" width="31.0" x="204.64900115289421" y="88.21474082614031"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="second-timer" id="BPMNShape_second-timer">
+        <omgdc:Bounds height="31.0" width="31.0" x="369.96591736418475" y="96.38074817248312"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="45.0" y="100.0"></omgdi:waypoint>
+        <omgdi:waypoint x="120.0" y="100.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="235.64712893667053" y="103.95564578196459"></omgdi:waypoint>
+        <omgdi:waypoint x="285.0" y="104.72279336192962"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="400.96591736418475" y="111.88074817248312"></omgdi:waypoint>
+        <omgdi:waypoint x="615.0" y="111.88074817248312"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="615.0" y="131.14124087362205"></omgdi:waypoint>
+        <omgdi:waypoint x="348.0642346286551" y="233.96752808577645"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="335.0" y="145.5"></omgdi:waypoint>
+        <omgdi:waypoint x="335.0" y="225.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="170.0" y="140.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="239.0"></omgdi:waypoint>
+        <omgdi:waypoint x="321.0" y="239.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,177 @@
+<section class="content container-fluid">
+    <div class="">
+        <label class="label-control"></label>
+        <div class="">
+            <table id="progress-table" class="table-striped table table-bordered table-hover dataTable" width="100%" cellspacing='0'></table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="processPanel" tabindex="-1" role="dialog" aria-labelledby="processPanel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span id="view-hiddenInfo" hidden="hidden"></span>处理信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="editForm" novalidate="novalidate">
+                    <div class="form-group">
+                        <div class="row form-line">
+                            <label class="col-md-3 control-label">处理意见</label>
+                            <input class="col-md-7" name="advice" id="advice" />
+                            <label class="col-md-2"></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="advice-submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="approve-panel" tabindex="-1" role="dialog" aria-labelledby="approve-panel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span id="approve-hiddenInfo" hidden="hidden"></span>详细信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="approve-applicant">申请人：</label>
+                    <div class="controls">
+                        <input type="text" class="form-control" id="approve-applicant" readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="approve-startDate">开始时间：</label>
+                    <input class="form-control date-time-picker" id="approve-startDate" type="text" readonly="readonly" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="approve-endDate">结束时间：</label>
+                    <input class="form-control date-time-picker" id="approve-endDate" type="text" readonly="readonly" />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="approve-reason">请假原因：</label>
+                    <div class="controls">
+                        <textarea id="approve-reason" class="form-control" name="reason" readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="approved">审批意见：</label>
+                    <div class="controls">
+                        <select class="form-control" name="leaderApproved" id="approved">
+                            <option value="true">同意</option>
+                            <option value="false">拒绝</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="approve-submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="apply-panel" tabindex="-1" role="dialog" aria-labelledby="apply-panel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span id="apply-hiddenInfo" hidden="hidden"></span>详细信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="apply-startDate">开始时间：</label>
+                    <div class="input-group date form-datetime">
+                        <input class="form-control date-time-picker" id="apply-startDate" type="text" readonly="readonly" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="apply-endDate">结束时间：</label>
+                    <div class="input-group date form-datetime">
+                        <input class="form-control date-time-picker" id="apply-endDate" type="text" readonly="readonly" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="apply-reason">请假原因：</label>
+                    <div class="controls">
+                        <textarea id="apply-reason" class="form-control" name="reason" required="required"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="apply-reason">是否继续申请：</label>
+                    <div class="controls">
+                        <select id="reApply" name="reApply">
+                            <option value='true'>重新申请</option>
+                            <option value='false'>结束流程</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="apply-submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="report-back-panel" tabindex="-1" role="dialog" aria-labelledby="report-back-panel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span id="report-back-hiddenInfo" hidden="hidden"></span>详细信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="report-back-applicant">申请人：</label>
+                    <div class="controls">
+                        <input type="text" class="form-control" readonly="readonly" id="report-back-applicant"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="report-back-startDate">开始时间：</label>
+                    <div class="input-group date controls">
+                        <input class="form-control date-time-picker" id="report-back-startDate" type="text" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="report-back-endDate">结束时间：</label>
+                    <div class="input-group date controls">
+                        <input class="form-control date-time-picker" id="report-back-endDate" type="text" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="report-back-reason">请假原因：</label>
+                    <div class="controls">
+                        <textarea id="report-back-reason" class="form-control" name="reason" readonly="readonly"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="reportBackDate">销假日期：</label>
+                    <div class="input-group date form-datetime">
+                        <input class="form-control date-time-picker" id="reportBackDate" type="text" readonly="readonly" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="report-back-submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" />
+<script src="/js/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" />
+<script src="/js/todo.js" />

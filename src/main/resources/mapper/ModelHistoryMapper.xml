@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.workflow.mapper.ModelHistoryMapper">
+    <resultMap id="modelHistoryMap" type="com.workflow.entity.activiti.ModelHistory">
+        <id property="id" column="id" />
+        <result property="removalDate" column="removal_date" />
+        <result property="modelId" column="model_id" />
+        <result property="name" column="name" />
+        <result property="key" column="model_key" />
+        <result property="description" column="description" />
+        <result property="created" column="created" />
+        <result property="lastUpdated" column="last_updated" />
+        <result property="createdBy" column="created_by" />
+        <result property="lastUpdatedBy" column="last_updated_by" />
+        <result property="version" column="version" />
+        <result property="modelEditorJson" column="model_editor_json" typeHandler="com.workflow.entity.activiti.CustomizedBlobTypeHandler" />
+        <result property="comment" column="model_comment" />
+        <result property="modelType" column="model_type" />
+    </resultMap>
+
+    <select id="findByCreatedByAndModelTypeAndRemovalDateIsNull" resultMap="modelHistoryMap">
+        select * from act_de_model_history as model where model.createdBy = #{user} and model.modelType = #{modelType}
+    </select>
+
+    <select id="findOne" resultMap="modelHistoryMap">
+        select * from act_de_model_history as model where model.model_id = #{modelId}
+    </select>
+
+    <select id="findByModelIdAndRemovalDateIsNullOrderByVersionDesc" resultMap="modelHistoryMap">
+        select * from act_de_model_history as model where model.model_id = #{modelId} order by version desc
+    </select>
+
+    <select id="findByModelIdOrderByVersionDesc" resultMap="modelHistoryMap">
+        select * from act_de_model_history as model where model.model_id = #{modelId} order by version desc
+    </select>
+
+    <insert id="save">
+        insert into act_de_model_history (`name`, model_key, model_id, description, created, last_updated,
+        created_by, last_updated_by , version, model_editor_json, model_comment, model_type, removal_date)
+        values (
+        #{name}, #{key}, #{modelId}, #{description}, #{created}, #{lastUpdated},
+        #{createdBy}, #{lastUpdatedBy}, #{version},
+        #{modelEditorJson}, #{comment}, #{modelType}, #{removalDate}
+        )
+    </insert>
+
+    <delete id="delete">
+        delete from act_de_model_history where id=#{id}
+    </delete>
+</mapper>
